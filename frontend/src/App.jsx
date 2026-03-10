@@ -23,31 +23,103 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" />;
 };
 
+const AppRoutes = () => {
+  const { user } = useAuth();
+
+  return (
+    <Routes>
+      {/* Rota raiz - redireciona baseado na autenticação */}
+      <Route path="/" element={
+        user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+      } />
+
+      {/* Página de login - acessível sem autenticação */}
+      <Route path="/login" element={
+        user ? <Navigate to="/dashboard" /> : <Login />
+      } />
+
+      {/* Modo projetor - acessível sem autenticação */}
+      <Route path="/projetor" element={<ProjectorMode />} />
+
+      {/* Rotas protegidas */}
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <Layout>
+            <Dashboard />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/ranking" element={
+        <ProtectedRoute>
+          <Layout>
+            <Ranking />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/unidades" element={
+        <ProtectedRoute>
+          <Layout>
+            <Units />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/desbravadores" element={
+        <ProtectedRoute>
+          <Layout>
+            <Pathfinders />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/pontuacoes" element={
+        <ProtectedRoute>
+          <Layout>
+            <PointTypes />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/adicionar-pontos" element={
+        <ProtectedRoute>
+          <Layout>
+            <AddPoints />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/gincanas" element={
+        <ProtectedRoute>
+          <Layout>
+            <Competitions />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/relatorios" element={
+        <ProtectedRoute>
+          <Layout>
+            <Reports />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/configuracoes" element={
+        <ProtectedRoute>
+          <Layout>
+            <Settings />
+          </Layout>
+        </ProtectedRoute>
+      } />
+    </Routes>
+  );
+};
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/projector" element={<ProjectorMode />} />
-          <Route path="/*" element={
-            <ProtectedRoute>
-              <Layout>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/ranking" element={<Ranking />} />
-                  <Route path="/units" element={<Units />} />
-                  <Route path="/pathfinders" element={<Pathfinders />} />
-                  <Route path="/point-types" element={<PointTypes />} />
-                  <Route path="/add-points" element={<AddPoints />} />
-                  <Route path="/competitions" element={<Competitions />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Routes>
-              </Layout>
-            </ProtectedRoute>
-          } />
-        </Routes>
+        <AppRoutes />
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;
       </Router>
     </AuthProvider>
   );

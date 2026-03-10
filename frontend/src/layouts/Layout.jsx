@@ -7,16 +7,16 @@ const Layout = ({ children }) => {
   const location = useLocation();
 
   const menuItems = [
-    { path: '/', label: 'Dashboard', icon: '📊' },
+    { path: '/dashboard', label: 'Dashboard', icon: '📊' },
     { path: '/ranking', label: 'Ranking', icon: '🏆' },
-    { path: '/units', label: 'Unidades', icon: '🏕️' },
-    { path: '/pathfinders', label: 'Desbravadores', icon: '👥' },
-    { path: '/point-types', label: 'Pontuações', icon: '⭐' },
-    { path: '/add-points', label: 'Adicionar Pontos', icon: '➕' },
-    { path: '/competitions', label: 'Gincanas', icon: '🎯' },
-    { path: '/reports', label: 'Relatórios', icon: '📋' },
-    { path: '/projector', label: 'Modo Projetor', icon: '📺' },
-    { path: '/settings', label: 'Configurações', icon: '⚙️' },
+    { path: '/unidades', label: 'Unidades', icon: '🏕️' },
+    { path: '/desbravadores', label: 'Desbravadores', icon: '👥' },
+    { path: '/pontuacoes', label: 'Pontuações', icon: '⭐' },
+    { path: '/adicionar-pontos', label: 'Adicionar Pontos', icon: '➕' },
+    { path: '/gincanas', label: 'Gincanas', icon: '🎯' },
+    { path: '/relatorios', label: 'Relatórios', icon: '📋' },
+    { path: '/projetor', label: 'Modo Projetor', icon: '📺' },
+    { path: '/configuracoes', label: 'Configurações', icon: '⚙️' },
   ];
 
   return (
